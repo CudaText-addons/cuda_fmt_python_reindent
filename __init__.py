@@ -1,15 +1,10 @@
 from .reindent import Reindenter
-
-class MyFile:
-    newlines = '\n'
-    def __init__(self, lines):
-        self.lines = lines
-    def readlines(self):
-        return self.lines
+from io import StringIO
 
 def do_reindent(text):
 
-    fake = MyFile(text.split('\n'))
-    r = Reindenter(fake)
+    f = StringIO(text)
+    r = Reindenter(f)
     r.run()
+    f.close()
     return ''.join(r.after)
